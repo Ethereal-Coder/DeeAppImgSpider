@@ -1,0 +1,2 @@
+include ':app', ':dee', ':X5WebDemoo'
+project(':X5WebDemoo').projectDir = new File('X5WebDemo')
