@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:id="@+id/rl_share_container"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:context=".ShareActivity">
+	<android.support.v7.widget.Toolbar
+			android:id="@+id/user_collect_toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"
+			android:background="#fff"
+			android:elevation="1px">
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:text="分享图文"
+				android:textColor="#323232"
+				android:textSize="15sp"/>
+		<TextView
+				android:id="@+id/tv_user_collect"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical|right"
+				android:paddingRight="20dp"
+				android:text="选择图片"
+				android:textColor="#fd6363"
+				android:textSize="12sp"/>
+
+	</android.support.v7.widget.Toolbar>
+	<RelativeLayout
+			android:id="@+id/rl_share_title"
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:layout_below="@+id/user_collect_toolbar"
+			android:layout_margin="4dp"
+			android:background="@drawable/et_share_title_bg">
+		<EditText
+				android:id="@+id/et_share_title"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@null"
+				android:gravity="start"
+				android:hint="dee share title"
+				android:textSize="13sp"/>
+	</RelativeLayout>
+
+	<android.support.v7.widget.RecyclerView
+			android:id="@+id/rv_user_collect"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_below="@+id/rl_share_title"/>
+
+</RelativeLayout>

@@ -3,20 +3,14 @@ package com.example.test_webview_demo.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.TextView;
-
-import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 public class X5WebView extends WebView {
-	TextView title;
 	private WebViewClient client = new WebViewClient() {
 		/**
 		 * 防止加载网页时调起系统浏览器
@@ -31,8 +25,8 @@ public class X5WebView extends WebView {
 	public X5WebView(Context arg0, AttributeSet arg1) {
 		super(arg0, arg1);
 		this.setWebViewClient(client);
-		// this.setWebChromeClient(chromeClient);
-		// WebStorage webStorage = WebStorage.getInstance();
+		 //this.setWebChromeClient(chromeClient);
+		 //WebStorage webStorage = WebStorage.getInstance();
 		initWebViewSettings();
 		this.getView().setClickable(true);
 	}
@@ -62,29 +56,33 @@ public class X5WebView extends WebView {
 		// settings 的设计
 	}
 
-	@Override
-	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
-		boolean ret = super.drawChild(canvas, child, drawingTime);
-		canvas.save();
-		Paint paint = new Paint();
-		paint.setColor(0x7fff0000);
-		paint.setTextSize(24.f);
-		paint.setAntiAlias(true);
-		if (getX5WebViewExtension() != null) {
-			canvas.drawText(this.getContext().getPackageName() + "-pid:"
-					+ android.os.Process.myPid(), 10, 50, paint);
-			canvas.drawText(
-					"X5  Core:" + QbSdk.getTbsVersion(this.getContext()), 10,
-					100, paint);
-		} else {
-			canvas.drawText(this.getContext().getPackageName() + "-pid:"
-					+ android.os.Process.myPid(), 10, 50, paint);
-			canvas.drawText("Sys Core", 10, 100, paint);
-		}
-		canvas.drawText(Build.MANUFACTURER, 10, 150, paint);
-		canvas.drawText(Build.MODEL, 10, 200, paint);
-		canvas.restore();
-		return ret;
+	//@Override
+	//protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+	//	boolean ret = super.drawChild(canvas, child, drawingTime);
+	//	canvas.save();
+	//	Paint paint = new Paint();
+	//	paint.setColor(0x7fff0000);
+	//	paint.setTextSize(24.f);
+	//	paint.setAntiAlias(true);
+	//	if (getX5WebViewExtension() != null) {
+	//		canvas.drawText(this.getContext().getPackageName() + "-pid:"
+	//				+ android.os.Process.myPid(), 10, 50, paint);
+	//		canvas.drawText(
+	//				"X5  Core:" + QbSdk.getTbsVersion(this.getContext()), 10,
+	//				100, paint);
+	//	} else {
+	//		canvas.drawText(this.getContext().getPackageName() + "-pid:"
+	//				+ android.os.Process.myPid(), 10, 50, paint);
+	//		canvas.drawText("Sys Core", 10, 100, paint);
+	//	}
+	//	canvas.drawText(Build.MANUFACTURER, 10, 150, paint);
+	//	canvas.drawText(Build.MODEL, 10, 200, paint);
+	//	canvas.restore();
+	//	return ret;
+	//}
+
+	@Override protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+		return super.drawChild(canvas, child, drawingTime);
 	}
 
 	public X5WebView(Context arg0) {

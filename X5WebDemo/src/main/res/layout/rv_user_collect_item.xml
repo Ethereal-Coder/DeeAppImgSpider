@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/ll_rv_user_collect_item"
+		android:layout_width="match_parent"
+		android:layout_height="105dp"
+		android:background="#ffffff">
+	<RelativeLayout
+			android:id="@+id/fl_rv_user_collect_item"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="3dp">
+		<ImageView
+				android:id="@+id/iv_rv_user_collect_item"
+				android:layout_width="match_parent"
+				android:layout_height="80dp"/>
+		<TextView
+				android:id="@+id/tv_rv_user_collect_item"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:background="@mipmap/user_collect_unselect"
+				android:visibility="gone"/>
+	</RelativeLayout>
+
+	<TextView
+			android:layout_below="@+id/tv_user_collect_item_size"
+			android:id="@+id/tv_user_collect_item_price"
+			android:layout_width="match_parent"
+			android:layout_height="46dp"
+			android:maxLines="3"
+			android:ellipsize="middle"
+			android:textColor="@color/colorPrimaryDark"
+			android:textSize="10dp"/>
+	<TextView
+			android:ellipsize="end"
+			android:singleLine="true"
+			android:textSize="12sp"
+			android:textColor="@color/colorPrimary"
+			android:id="@+id/tv_user_collect_item_size"
+			android:layout_alignParentBottom="true"
+			android:layout_width="match_parent"
+			android:layout_height="20dp"/>
+
+</RelativeLayout>
+

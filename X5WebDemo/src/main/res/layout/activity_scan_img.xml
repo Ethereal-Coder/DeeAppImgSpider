@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+		android:background="#3c3f41"
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:context=".ScanImgActivity">
+	<android.support.v7.widget.Toolbar
+			android:background="#ffffff"
+			android:elevation="1dp"
+			android:id="@+id/toolbar_scan_img"
+			android:layout_width="match_parent"
+			android:layout_height="48dp"/>
+	<com.shizhefei.view.largeimage.LargeImageView
+			android:layout_below="@+id/toolbar_scan_img"
+			android:id="@+id/liv_scan_img"
+			android:scrollbars="vertical|horizontal"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent" />
+</RelativeLayout>
