@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:padding="3dp"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+	<ImageView
+			android:scaleType="centerCrop"
+			android:layout_centerInParent="true"
+			android:id="@+id/iv_rv_item_detail_edit"
+			android:layout_width="60dp"
+			android:layout_height="60dp"/>
+	<TextView
+			android:layout_alignParentTop="true"
+			android:layout_alignParentRight="true"
+			android:background="@drawable/delet_zhaopian_1x"
+			android:id="@+id/tv_rv_item_detail_edit_delete"
+			android:layout_width="24dp"
+			android:layout_height="24dp"/>
+
+</RelativeLayout>

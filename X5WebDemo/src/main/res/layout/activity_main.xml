@@ -21,7 +21,7 @@
 				android:layout_marginLeft="10dp"
 				android:layout_marginRight="10dp"
 				android:layout_marginTop="3dp"
-				android:layout_weight="8"
+				android:layout_weight="6"
 				android:background="@null"
 				android:ems="10"
 				android:hint="请输入网址..."
@@ -36,10 +36,22 @@
 				android:layout_marginLeft="1dp"
 				android:layout_marginRight="10dp"
 				android:layout_marginTop="3dp"
+				android:layout_weight="2"
+				android:background="#ECF0F2"
+				android:linksClickable="false"
+				android:text="go"
+				android:textSize="13sp"/>
+		<Button
+				android:id="@+id/btn_clear"
+				android:layout_width="2dp"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="1dp"
+				android:layout_marginRight="10dp"
+				android:layout_marginTop="3dp"
 				android:layout_weight="1"
 				android:background="#ECF0F2"
 				android:linksClickable="false"
-				android:text="GO"
+				android:text="清空"
 				android:textSize="13sp"/>
 
 	</LinearLayout>
@@ -104,7 +116,7 @@
 
 		<Button
 				android:textColor="#eeeeee"
-				android:text="一键获取网页图片"
+				android:text="抓取图文"
 				android:id="@+id/btnMore"
 				android:layout_width="0dp"
 				android:layout_height="match_parent"

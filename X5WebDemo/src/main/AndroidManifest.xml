@@ -54,11 +54,6 @@
 				android:name=".BrowserActivity"
 				android:configChanges="orientation|screenSize|keyboardHidden"
 				android:label="@string/app_name">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"/>
-
-				<category android:name="android.intent.category.LAUNCHER"/>
-			</intent-filter>
 		</activity>
 		<activity
 				android:name=".MainActivity"
@@ -67,6 +62,22 @@
 		<activity android:name=".ShareActivity">
 		</activity>
 		<activity android:name=".ScanImgActivity">
+		</activity>
+		<activity
+				android:name=".mainpf.MainPlateformActivity"
+				android:configChanges="orientation|screenSize|keyboardHidden"
+				android:launchMode="singleTask">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
+		<activity android:name=".detail.DetailEditActivity">
+		</activity>
+		<activity android:name=".detail.ImgSelectActivity">
+		</activity>
+		<activity android:name=".detail.ScanActivity">
 		</activity>
 	</application>
 

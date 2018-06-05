@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/DeeIS.iml" filepath="$PROJECT_DIR$/DeeIS.iml" />
       <module fileurl="file://$PROJECT_DIR$/X5WebDemo/X5WebDemoo.iml" filepath="$PROJECT_DIR$/X5WebDemo/X5WebDemoo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dee/dee.iml" filepath="$PROJECT_DIR$/dee/dee.iml" />
     </modules>
   </component>

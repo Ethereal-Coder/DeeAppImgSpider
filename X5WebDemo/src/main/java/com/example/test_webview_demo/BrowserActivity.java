@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
@@ -27,6 +28,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import com.example.test_webview_demo.detail.DeeImgEntity;
+import com.example.test_webview_demo.detail.DetailEditActivity;
 import com.example.test_webview_demo.net.VisitorNets;
 import com.example.test_webview_demo.utils.X5WebView;
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient.CustomViewCallback;
@@ -67,9 +70,10 @@ public class BrowserActivity extends Activity {
   private ImageButton mHome;
   private Button mMore;
   private Button mGo;
+  private Button mClear;
   private EditText mUrl;
 
-  private static final String mHomeUrl = "http://m.taobao.com";
+  private static final String mHomeUrl = "https://m.1688.com";
   private static final String TAG = "Dee_log";
   private static final String TAG_IMG = "Dee_img";
   private static final String TAG_HOST = "Dee_host";
@@ -99,7 +103,7 @@ public class BrowserActivity extends Activity {
     Intent intent = getIntent();
     if (intent != null) {
       try {
-        mIntentUrl = new URL(intent.getData().toString());
+        mIntentUrl = new URL(intent.getStringExtra("plate_url"));
       } catch (MalformedURLException e) {
         e.printStackTrace();
       } catch (NullPointerException e) {
@@ -180,6 +184,8 @@ public class BrowserActivity extends Activity {
           dee_filter = "tb";
         } else if (host.contains("jd")) {
           dee_filter = "jd";
+        } else if (host.contains("1688")) {
+          dee_filter = "1688";
         } else {
           dee_filter = "normal";
         }
@@ -190,6 +196,9 @@ public class BrowserActivity extends Activity {
           getWebTitleByJsoup(s, "tb");
         } else if (host.contains("tmall") && host.contains("detail")) {
           getWebTitleByJsoup(s, "tm");
+        }
+        if (s.contains("m.1688.com/offer")){
+          getwebByJsoup(s);
         }
         //getWebTitleByRetrofit(s);
         Log.e(TAG_FINISH, "pageStarted：" + s);
@@ -208,19 +217,22 @@ public class BrowserActivity extends Activity {
       @Override public void onLoadResource(WebView webView, String url) {
         //super.onLoadResource(webView, s);
         if (isImageSuffix(url)) {
+          Log.i(TAG_IMG, "加载img：" + url);
           if (dee_filter.equals("tb")) {
-            Log.e(TAG_IMG, "加载img：" + url);
             if ((url.contains("/tps"))
                 ||(url.contains("imgextra"))
                 ||(url.contains("tfscom"))
                 ||(url.contains("uploaded"))){
               imgUrls.add(url);
-              Log.i(TAG_IMG, "加载img：" + url);
             }else {
-              Log.w(TAG_IMG, "加载img：" + url);
+
             }
           } else if (dee_filter.equals("jd")) {
             if (url.contains("da") || url.contains("mobilecms") || url.contains("jdphoto")) {
+              imgUrls.add(url);
+            }
+          }else if (dee_filter.equals("1688")) {
+            if (url.contains("ibank") || url.contains("mobilecms") || url.contains("jdphoto")) {
               imgUrls.add(url);
             }
           } else {
@@ -350,6 +362,54 @@ public class BrowserActivity extends Activity {
     Log.d("time-cost", "cost time: " + (System.currentTimeMillis() - time));
     CookieSyncManager.createInstance(this);
     CookieSyncManager.getInstance().sync();
+  }
+
+  private void getwebByJsoup(String url) {
+    final String path = Environment.getExternalStorageDirectory() + "/DAYU/1688";
+    if (disposable != null && !disposable.isDisposed()) {
+      disposable.dispose();
+    }
+    io.reactivex.Observable.just(url)
+        .observeOn(Schedulers.io())
+        .subscribeOn(Schedulers.io())
+        .subscribe(new Observer<String>() {
+          @Override public void onSubscribe(Disposable d) {
+            disposable = d;
+          }
+
+          @Override public void onNext(String url) {
+            try {
+              Document doc = Jsoup.connect(url).timeout(5000).get();
+              //Log.e("Dee_content", doc.toString());
+              Elements elements = doc.select("h1[class]");
+              for (Element meta : elements) {
+                //Log.e("Dee_content",meta.toString());
+                if (meta.attr("class").equals("d-title")) {
+                  String content = meta.text();
+                  //Log.e("Dee_content",content);
+                  title_j = content;
+                }
+              }
+              //String s = doc.toString();
+              //int wingxViewData = s.lastIndexOf("wingxViewData");
+              //String substring = s.substring(wingxViewData);
+              //int xx = substring.indexOf("</script>");
+              //String s1 = substring.substring(0, xx);
+              //Log.e("Dee_content", s1);
+
+              //FileUtils.writeTxtToFile(doc.toString(),path,"xx.txt");
+            } catch (IOException e) {
+              e.printStackTrace();
+            }
+          }
+
+          @Override public void onError(Throwable e) {
+          }
+
+          @Override public void onComplete() {
+
+          }
+        });
   }
 
   private void getWebTitleByRetrofit(String url) {
@@ -567,6 +627,7 @@ public class BrowserActivity extends Activity {
     //mExit = (ImageButton) findViewById(R.id.btnExit1);
     mHome = (ImageButton) findViewById(R.id.btnHome1);
     mGo = (Button) findViewById(R.id.btnGo1);
+    mClear = (Button) findViewById(R.id.btn_clear);
     mUrl = (EditText) findViewById(R.id.editUrl1);
     mMore = (Button) findViewById(R.id.btnMore);
     if (Integer.parseInt(android.os.Build.VERSION.SDK) >= 16) {
@@ -599,23 +660,38 @@ public class BrowserActivity extends Activity {
       }
     });
 
+    mClear.setOnClickListener(new OnClickListener() {
+      @Override public void onClick(View v) {
+        mUrl.setText("");
+      }
+    });
+
     mMore.setOnClickListener(new OnClickListener() {
 
       @Override public void onClick(View v) {
         if (imgUrls.size() == 0) {
           Toast.makeText(BrowserActivity.this, "请换个网页尝试", Toast.LENGTH_LONG).show();
         } else {
-          ArrayList<String> list = new ArrayList<>();
+          //ArrayList<String> list = new ArrayList<>();
+          //for (int i = 0; i < imgUrls.size(); i++) {
+          //  if (checkImgSize(imgUrls.get(i))){
+          //    list.add(imgUrls.get(i));
+          //  }
+          //}
+          //Intent intent = new Intent(BrowserActivity.this, ShareActivity.class);
+          //intent.putStringArrayListExtra("share_imgs", imgUrls);
+          //intent.putExtra("share_title", title_j.isEmpty() ? title_x : title_j);
+          //startActivity(intent);
+
+          ArrayList<DeeImgEntity> list = new ArrayList<>();
           for (int i = 0; i < imgUrls.size(); i++) {
             if (checkImgSize(imgUrls.get(i))){
-              //Log.e("Dee_remove", imgUrls.get(i));
-              //imgUrls.remove(i);
-              list.add(imgUrls.get(i));
+              list.add(new DeeImgEntity(imgUrls.get(i)));
             }
           }
-          Intent intent = new Intent(BrowserActivity.this, ShareActivity.class);
-          intent.putStringArrayListExtra("share_imgs", imgUrls);
-          intent.putExtra("share_title", title_j.isEmpty() ? title_x : title_j);
+          Intent intent = new Intent(BrowserActivity.this, DetailEditActivity.class);
+          intent.putExtra("spider_title", title_j.isEmpty() ? title_x : title_j);
+          intent.putParcelableArrayListExtra("spider_img_list",list);
           startActivity(intent);
         }
       }
@@ -680,7 +756,8 @@ public class BrowserActivity extends Activity {
     mHome.setOnClickListener(new OnClickListener() {
 
       @Override public void onClick(View v) {
-        if (mWebView != null) mWebView.loadUrl(mHomeUrl);
+        //if (mWebView != null) mWebView.loadUrl(mHomeUrl);
+        finish();
       }
     });
 
