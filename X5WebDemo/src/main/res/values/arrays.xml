@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="week">
+		<item>颜色</item>
+		<item>尺码</item>
+		<item>颜色1</item>
+		<item>尺码1</item>
+		<item>颜色2</item>
+		<item>尺码2</item>
+	</string-array>
+</resources>

@@ -8,6 +8,10 @@ import android.util.AttributeSet;
 
 public class AutoScaleHeightImageView extends AppCompatImageView {
 
+	public AutoScaleHeightImageView(Context context) {
+		this(context,null);
+	}
+
 	public AutoScaleHeightImageView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}

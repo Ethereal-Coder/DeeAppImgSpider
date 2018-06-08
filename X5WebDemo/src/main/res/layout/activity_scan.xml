@@ -9,19 +9,69 @@
 	<RelativeLayout
 			android:layout_width="match_parent"
 			android:layout_height="42dp">
-		<TextView
-				android:text="大鱼水果旗舰店"
-				android:layout_centerInParent="true"
+		<Button
+				android:id="@+id/btn_scan_back"
 				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"/>
+				android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+				android:layout_marginLeft="10dp"
+				android:text="返回"/>
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerInParent="true"
+				android:text="大鱼水果旗舰店"/>
+
+		<Button
+				android:id="@+id/btn_scan_commit"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_alignParentRight="true"
+				android:layout_centerVertical="true"
+				android:text="提交"/>
 	</RelativeLayout>
 	<android.support.v4.widget.NestedScrollView
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
+			android:layout_height="match_parent"
+			android:layout_marginTop="42dp"
+			android:fillViewport="true">
 		<LinearLayout
-				android:orientation="vertical"
 				android:layout_width="match_parent"
-				android:layout_height="match_parent">
+				android:layout_height="match_parent"
+				android:orientation="vertical">
+			<com.bigkoo.convenientbanner.ConvenientBanner
+					android:id="@+id/banner_scan"
+					android:layout_width="match_parent"
+					android:layout_height="350dp">
+			</com.bigkoo.convenientbanner.ConvenientBanner>
+			<TextView
+					android:id="@+id/title_scan"
+					android:layout_width="match_parent"
+					android:layout_height="60dp"
+					android:ellipsize="end"
+					android:lineSpacingExtra="4dp"
+					android:maxLines="2"
+					android:paddingLeft="10dp"/>
+			<TextView
+					android:id="@+id/price_scan"
+					android:layout_width="match_parent"
+					android:layout_height="40dp"
+					android:paddingLeft="10dp"/>
+			<View android:layout_width="match_parent"
+					android:layout_height="5dp"
+					android:background="#ececec"/>
+			<TextView
+					android:layout_width="match_parent"
+					android:layout_height="48dp"
+					android:gravity="center"
+					android:text="商品详情"/>
+			<View android:layout_width="match_parent"
+					android:layout_height="1dp"
+					android:background="#ececec"/>
+			<android.support.v7.widget.RecyclerView
+					android:id="@+id/rv_scan"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"/>
 
 		</LinearLayout>
 

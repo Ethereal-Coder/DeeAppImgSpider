@@ -1,14 +1,12 @@
 package com.example.test_webview_demo.mainpf;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.example.test_webview_demo.BrowserActivity;
 import com.example.test_webview_demo.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +15,7 @@ import java.util.List;
  * Created by 孙应恒 on 2018/6/5.
  * Description:
  */
-class MainPlateformAdapter extends RecyclerView.Adapter<MainPlateformAdapter.PlateHolder> {
+public class MainPlateformAdapter extends RecyclerView.Adapter<MainPlateformAdapter.PlateHolder> {
   List<MainPfEntity> mData;
   private Context context;
 
@@ -28,6 +26,10 @@ class MainPlateformAdapter extends RecyclerView.Adapter<MainPlateformAdapter.Pla
   public void addData(@NonNull List<MainPfEntity> data){
     mData.addAll(data);
     notifyDataSetChanged();
+  }
+
+  public List<MainPfEntity> getmData() {
+    return mData;
   }
 
   @NonNull @Override public PlateHolder onCreateViewHolder(@NonNull ViewGroup parent,
@@ -51,14 +53,27 @@ class MainPlateformAdapter extends RecyclerView.Adapter<MainPlateformAdapter.Pla
       tv= itemView.findViewById(R.id.tv_rv_item_main_plate);
     }
 
-    public void bind(int position) {
+    public void bind(final int position) {
       final MainPfEntity mainPfEntity = mData.get(position);
       tv.setText(mainPfEntity.getName());
       itemView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
-          context.startActivity(new Intent(context, BrowserActivity.class).putExtra("plate_url",mainPfEntity.getUrl()));
+          //context.startActivity(new Intent(context, BrowserActivity.class).putExtra("plate_url",mainPfEntity.getUrl()));
+       if (selectListener != null){
+         selectListener.onSelect(position);
+       }
         }
       });
     }
+  }
+
+  private OnSelectListener selectListener;
+
+  public void setSelectListener(OnSelectListener onSelectListener) {
+    this.selectListener = onSelectListener;
+  }
+
+  public interface OnSelectListener{
+    void onSelect(int position);
   }
 }

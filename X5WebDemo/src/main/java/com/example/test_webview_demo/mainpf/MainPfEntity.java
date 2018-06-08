@@ -8,8 +8,17 @@ import android.os.Parcelable;
  * Description:
  */
 public class MainPfEntity implements Parcelable {
-  String name;
-  String url;
+  private String name;
+  private String url;
+  private Long id;
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
 
   public MainPfEntity(String name, String url) {
     this.name = name;
@@ -39,11 +48,13 @@ public class MainPfEntity implements Parcelable {
   @Override public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.name);
     dest.writeString(this.url);
+    dest.writeValue(this.id);
   }
 
   protected MainPfEntity(Parcel in) {
     this.name = in.readString();
     this.url = in.readString();
+    this.id = (Long) in.readValue(Long.class.getClassLoader());
   }
 
   public static final Parcelable.Creator<MainPfEntity> CREATOR =

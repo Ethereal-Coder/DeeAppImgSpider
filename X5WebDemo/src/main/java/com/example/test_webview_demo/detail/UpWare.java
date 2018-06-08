@@ -1,5 +1,7 @@
 package com.example.test_webview_demo.detail;
 
+import java.util.List;
+
 /**
  * Created by 孙应恒 on 2018/6/5.
  * Description:
@@ -31,6 +33,16 @@ public class UpWare {
   private String attributes;//属性值
   private String deleteSkuIds;//编辑时 删除的Sku的ids
   private Long shopId;//店铺ID
+
+  private List<SkuProp> skuProps;
+
+  public List<SkuProp> getSkuProps() {
+    return skuProps;
+  }
+
+  public void setSkuProps(List<SkuProp> skuProps) {
+    this.skuProps = skuProps;
+  }
 
   public Long getId() {
     return id;

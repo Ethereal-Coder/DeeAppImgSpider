@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Description:
  */
 public class VisitorNets {
-  public static final String BASE_MOBILE_URL = "http://api.dayuyoupin.com/mobile/api/v0.0.1/";
+  public static final String BASE_MOBILE_URL = "http://192.168.1.94:8081/mobile/";
   private static final int DEFAULT_TIMEOUT = 10;
   private Retrofit retrofit;
   private VisitorApi visitorApi;
@@ -28,13 +28,13 @@ public class VisitorNets {
       @Override public Response intercept(Chain chain) throws IOException {
         Request original = chain.request();
         Request request = original.newBuilder()
-            //.addHeader("dpbay-token",
-            //    DBUtil.getLoginAccessTokenBeanDao().queryBuilder().build().unique().getAutoToken())
+            .addHeader("token","125AA9CD290C")
             .method(original.method(), original.body()).build();
         return chain.proceed(request);
       }
     });
-    retrofit = new Retrofit.Builder().client(builder.build())
+    retrofit = new Retrofit.Builder()
+        .client(builder.build())
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         .baseUrl(BASE_MOBILE_URL)
@@ -57,4 +57,8 @@ public class VisitorNets {
   public Observable loadHtml(String url) {
     return visitorApi.loadHtml(url);
   }
+
+  //public Observable postMsg( RequestBody msg){
+  //  return visitorApi.postMsg(msg);
+  //}
 }

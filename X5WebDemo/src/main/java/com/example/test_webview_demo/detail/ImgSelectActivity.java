@@ -30,15 +30,28 @@ public class ImgSelectActivity extends AppCompatActivity {
     GridLayoutManager layoutManager = new GridLayoutManager(this,2);
     imgType = getIntent().getIntExtra("img_type", 0);
     adapter = new ImgSelectAdapter(imgList,imgType);
+    if (imgType == 0){
+      adapter.setOnEditClickListener(new ImgSelectAdapter.OnEditClickListener() {
+        @Override public void onSelect(String xx) {
+          Intent intent = new Intent();
+          intent.putExtra("img_select_sku",xx);
+          setResult(RESULT_OK,intent);
+          finish();
+        }
+      });
+    }
     rvImgSelect.setLayoutManager(layoutManager);
     rvImgSelect.setAdapter(adapter);
   }
 
-  @OnClick({ R.id.tv_img_select_cancel, R.id.tv_img_select_complete })
+  @OnClick({ R.id.tv_img_select_cancel, R.id.tv_img_select_complete ,R.id.tv_img_select_clear})
   public void onViewClicked(View view) {
     switch (view.getId()) {
       case R.id.tv_img_select_cancel:
         finish();
+        break;
+      case R.id.tv_img_select_clear:
+        adapter.clearSelect();
         break;
       case R.id.tv_img_select_complete:
         Intent intent = new Intent();

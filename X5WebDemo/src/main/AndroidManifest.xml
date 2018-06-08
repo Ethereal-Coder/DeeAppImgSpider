@@ -21,12 +21,11 @@
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
 	<!-- 硬件加速对X5视频播放非常重要，建议开启 -->
-	<uses-permission android:name="android.permission.GET_TASKS"/>
+	<!--<uses-permission android:name="android.permission.GET_TASKS"/>-->
 
 	<application
 			android:name=".APPAplication"
 			android:allowBackup="true"
-			android:hardwareAccelerated="true"
 			android:icon="@mipmap/ic_launcher"
 			android:label="@string/app_name"
 			android:theme="@style/AppTheme">
@@ -78,6 +77,12 @@
 		<activity android:name=".detail.ImgSelectActivity">
 		</activity>
 		<activity android:name=".detail.ScanActivity">
+		</activity>
+		<activity android:name=".detail.ShopSelectActivity">
+		</activity>
+		<activity android:name=".detail.SkuEditActivity">
+		</activity>
+		<activity android:name=".detail.ali88.Scan1688Activity">
 		</activity>
 	</application>
 
